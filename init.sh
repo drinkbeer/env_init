@@ -6,13 +6,23 @@ install_zsh() {
     sudo apt update
     sudo apt install -y zsh
 
-    # Install Oh My Zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    # Check if Oh My Zsh is already installed
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        # Install Oh My Zsh
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    else
+        echo "Oh My Zsh is already installed."
+    fi
 }
 
 # Function to install zsh-autosuggestions
 install_zsh_autosuggestions() {
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    # Check if zsh-autosuggestions is already installed
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    else
+        echo "zsh-autosuggestions is already installed."
+    fi
 }
 
 # Function to set up .zshrc
