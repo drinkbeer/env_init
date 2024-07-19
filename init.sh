@@ -27,6 +27,9 @@ install_zsh_autosuggestions() {
 
 # Function to set up .zshrc
 setup_zshrc() {
+    # Backup existing .zshrc
+    cp ~/.zshrc ~/.zshrc.bak
+
     cat << 'EOF' > ~/.zshrc
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -406,6 +409,7 @@ function acp() {
   git push
 }
 EOF
+
     source ~/.zshrc
 }
 
